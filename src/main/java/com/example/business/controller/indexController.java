@@ -2,7 +2,6 @@ package com.example.business.controller;
 
 
 import com.example.utils.RedisUtil;
-import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,8 @@ public class indexController {
 
     @RequestMapping(value = "/test")
     @ResponseBody
-    public void test(@RequestParam("username") String username, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    public String test(@RequestParam("username") String username, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+        String sessionId = "";
         try {
 //            httpSession.setAttribute("'test",new Date());
             //session 保持登录状态
@@ -55,7 +55,7 @@ public class indexController {
 //            request.getSession("username");
 
 
-            String sessionId = session.getId();
+            sessionId = session.getId();
             Cookie cookie = new Cookie("JSESSIONID", sessionId);
             cookie.setPath(request.getContextPath());
             response.addCookie(cookie);
@@ -70,9 +70,11 @@ public class indexController {
             logger.info("redisValue=" + redisValue);
             logger.info("读取redis成功");
 //            logger.info(value.toString());
+            return sessionId;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return sessionId;
     }
 
 }
