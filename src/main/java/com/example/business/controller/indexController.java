@@ -1,11 +1,14 @@
 package com.example.business.controller;
 
 
+import com.example.common.dto.UserDto;
 import com.example.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
@@ -32,7 +36,7 @@ public class indexController {
 
     @RequestMapping(value = "/test")
     @ResponseBody
-    public String test(@RequestParam("username") String username, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    public String test(@Validated @RequestBody UserDto userDto, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         String sessionId = "";
         try {
 //            httpSession.setAttribute("'test",new Date());
@@ -48,7 +52,7 @@ public class indexController {
             Object value = session.getAttribute("username");
             if (value == null) {
                 System.out.println("用户不存在");
-                session.setAttribute("username", "{username: '" + username + "', age: 28}");
+                session.setAttribute("username", "{username: '" + userDto.getUserName() + "', age: 28}");
             } else {
                 System.out.println("用户存在");
             }
