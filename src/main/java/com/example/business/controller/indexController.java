@@ -3,6 +3,7 @@ package com.example.business.controller;
 
 import com.example.common.dto.UserDto;
 import com.example.utils.RedisUtil;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
-
+@Api(value = "测试测试", description = "测试~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 @Controller
 public class indexController {
 
@@ -28,14 +28,13 @@ public class indexController {
     @Autowired
     private RedisUtil redisUtil;
 
-    @RequestMapping("/")
-//    @ResponseBody
+    @ResponseBody
+    @RequestMapping()
     public String sayHello() {
         return "/index.html";
     }
 
-    @RequestMapping(value = "/test")
-    @ResponseBody
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(@Validated @RequestBody UserDto userDto, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         String sessionId = "";
         try {
