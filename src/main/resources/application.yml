@@ -30,3 +30,8 @@ spring:
   #session存储格式为redis
   session:
     store-type: redis
+  rabbitmq:
+    host: 192.168.31.248
+    port: 5672
+    username: admin
+    password: password
