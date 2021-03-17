@@ -2,8 +2,8 @@ package com.example.test;
 
 public class MyThread {
     public static void main(String[] args) {
-        MyRunnable mr = new MyRunnable();
-        MyRunnable2 mr2 = new MyRunnable2();
+        MyRunnableTest mr = new MyRunnableTest();
+        MyRunnable2Test mr2 = new MyRunnable2Test();
         Thread t1 = new Thread(mr);
         Thread t2 = new Thread(mr2);
         //线程优先级
