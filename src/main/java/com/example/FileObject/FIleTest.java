@@ -18,5 +18,6 @@ public class FIleTest {
         }
         //获取文件名称
         System.out.println(f2.getName());
+        System.out.println(f2.delete());
     }
 }
