@@ -16,7 +16,7 @@ public class FIleTest {
         }else if (f2.isFile()){
             System.out.println("f2对象表示的是文件");
         }
-        //获取文件名称
+        //获取文件名称a
         System.out.println(f2.getName());
         System.out.println(f2.delete());
     }
