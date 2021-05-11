@@ -3,6 +3,11 @@ spring:
     cache: false
   application:
     name: xiaotuzi
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.31.248:3306/stydy_system?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
   # Redis数据库索引（默认为0）
   main:
     allow-bean-definition-overriding: true

@@ -14,6 +14,11 @@ public class Lambda {
 //        filter(features,(str) -> true);
         filter(features,(str) ->str.startsWith("J"));
 //        filter(features, (str)->str.endsWith("a"));
+
+
+        //map 输出
+        List<Double> costBeforeTax = Arrays.asList(100.00,200.00,300.10,400.11,500.11);
+        costBeforeTax.stream().map((cost) -> cost + .12 * cost).forEach(System.out::println);
     }
 
 
