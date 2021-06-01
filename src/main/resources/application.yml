@@ -1,3 +1,5 @@
+server:
+  port: 8090
 spring:
   thymeleaf:
     cache: false
@@ -36,11 +38,11 @@ spring:
   #session存储格式为redis
   session:
     store-type: redis
-  rabbitmq:
-    host: 192.168.31.248
-    port: 5672
-    username: admin
-    password: password
+#  rabbitmq:
+#    host: 192.168.31.248
+#    port: 5672
+#    username: admin
+#    password: password
 
 # 配置日志
 logging:
