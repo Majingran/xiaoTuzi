@@ -4,6 +4,10 @@ import com.example.dao.entity.User;
 import com.example.dao.entity.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +26,9 @@ public class JdbcTest {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @GetMapping(value = "/hello")
     public String index (){
         String sql = "select id from user ";
@@ -29,17 +36,24 @@ public class JdbcTest {
         return ID;
     }
 
-    @GetMapping(value = "/login")
-    public Map<String,Object> mpTest (){
+    @PostMapping(value = "/login")
+    public Map<String,Object> login (@RequestBody LoginParam param){
 //        List<User> userList = userDao.selectList(null);
 //        return userList;
         User user = new User();
         user.setID("1111");
         List<User> userList = new ArrayList<>();
         userList.add(user);
-
-
         System.out.println(userList);
+
+
+
+        //spring security 认证
+        Authentication token = new UsernamePasswordAuthenticationToken(param.getUsername(),param.getPassword());
+        //校验token
+        Authentication authentication = authenticationManager.authenticate(token);
+        //保存到上下文中
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         HashMap<String,Object> returnMap = new HashMap<>();
         Map<String,Object> dataMap = new HashMap<>();
@@ -58,7 +72,7 @@ public class JdbcTest {
         dataMap.put("token","admin-token");
 //            roles: ['admin'],
 //            introduction: 'I am a super administrator',
-//            avatar: '',
+//            avatar: '',9
 //            name: 'Super Admin'
         String [] roles = {"admin"};
         String introduction = "I am a super administrator";
