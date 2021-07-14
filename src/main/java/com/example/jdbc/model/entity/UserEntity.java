@@ -14,6 +14,8 @@ import java.io.Serializable;
 public class UserEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private Long id;
+
     /**
      * 用户名
      */
@@ -37,5 +39,13 @@ public class UserEntity extends BaseEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+         this.id = id;
     }
 }
