@@ -62,7 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers("/*/*/*/login").anonymous()
-                .antMatchers("com/rabbit/user/logout").permitAll()
+//                .antMatchers("/test").permitAll()
+                .antMatchers("/com/rabbit/user/logout").permitAll()
+                .antMatchers("/test").permitAll()
                 .anyRequest().authenticated();
         http.exceptionHandling().authenticationEntryPoint(unauthorizeHandler);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

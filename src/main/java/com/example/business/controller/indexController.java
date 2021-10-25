@@ -2,7 +2,7 @@ package com.example.business.controller;
 
 
 import com.example.common.dto.UserDto;
-import com.example.utils.RedisUtil;
+import com.example.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +25,13 @@ public class indexController {
     private final Logger logger = LoggerFactory.getLogger(indexController.class);
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisUtils redisUtils;
 
-    @ResponseBody
-    @RequestMapping()
-    public String sayHello() {
-        return "/index.html";
-    }
+//    @ResponseBody
+//    @RequestMapping()
+//    public String sayHello() {
+//        return "/index.html";
+//    }
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(@Validated @RequestBody UserDto userDto, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
@@ -68,8 +67,8 @@ public class indexController {
 
 
             //redis 放入数据
-            redisUtil.set("redisTemplate", "这是一支兔子", 2);
-            String redisValue = redisUtil.get("redisTemplate", 2).toString();
+            redisUtils.set("redisTemplate", "这是一支兔子");
+            String redisValue = redisUtils.get("redisTemplate").toString();
             logger.info("redisValue=" + redisValue);
             logger.info("读取redis成功");
 //            logger.info(value.toString());

@@ -12,8 +12,6 @@ import org.springframework.util.StringUtils;
 import java.time.Duration;
 import java.util.Date;
 
-import static com.mchange.v2.log.MLog.info;
-
 /**
  * JWT工具类
  *
@@ -22,7 +20,7 @@ import static com.mchange.v2.log.MLog.info;
 @Slf4j
 @Component
 public class JwtManager {
-    @Value("${security.jwt.secretKey}")
+//    @Value("${security.jwt.secretKey}")
     private String secretKey;
     /**
      * 过期时间目前设置成2天，这个配置随业务需求而定
